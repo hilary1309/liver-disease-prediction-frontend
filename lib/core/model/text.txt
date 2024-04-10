@@ -1,0 +1,43 @@
+// To parse this JSON data, do
+//
+//     final fetchResultsModel = fetchResultsModelFromJson(jsonString);
+
+import 'dart:convert';
+
+FetchResultsModel fetchResultsModelFromJson(String str) => FetchResultsModel.fromJson(json.decode(str));
+
+String fetchResultsModelToJson(FetchResultsModel data) => json.encode(data.toJson());
+
+class FetchResultsModel {
+    String? id;
+    String? highestConfidenceClass;
+    double? highestConfidenceScore;
+    List<String>? suggestions;
+    String? imageUrl;
+
+    FetchResultsModel({
+        this.id,
+        this.highestConfidenceClass,
+        this.highestConfidenceScore,
+        this.suggestions,
+        this.imageUrl,
+    });
+
+    factory FetchResultsModel.fromJson(Map<String, dynamic> json) => FetchResultsModel(
+        id: json["_id"],
+        highestConfidenceClass: json["highest_confidence_class"],
+        highestConfidenceScore: json["highest_confidence_score"]?.toDouble(),
+        suggestions: json["suggestions"] == null ? [] : List<String>.from(json["suggestions"]!.map((x) => x)),
+        imageUrl: json["Image URL"],
+    );
+
+  get predictions => null;
+
+    Map<String, dynamic> toJson() => {
+        "_id": id,
+        "highest_confidence_class": highestConfidenceClass,
+        "highest_confidence_score": highestConfidenceScore,
+        "suggestions": suggestions == null ? [] : List<dynamic>.from(suggestions!.map((x) => x)),
+        "Image URL": imageUrl,
+    };
+}
