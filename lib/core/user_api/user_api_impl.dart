@@ -46,7 +46,8 @@ class UserApiImpl implements UserApi {
     //log("$val");   
      var responsebody = await server.post(
        // "http://127.0.0.1:8000/detection", headerWithToken(), val,
-        "http://10.0.2.2:8000/detection", header, "",
+       // "http://10.0.2.2:8000/detection", header, "",
+        "https://liver-disease-prediction-backend-1.onrender.com/detection", header, "",
         multimediaRequest: formData);
     ImageResponseModel response = imageResponseModelFromJson(responsebody);
     return response;
@@ -57,7 +58,8 @@ class UserApiImpl implements UserApi {
   
      var responsebody = await server.get(
        // "http://127.0.0.1:8000/detection", headerWithToken(), val,
-        "http://10.0.2.2:8000/get_predictions", header
+       // "http://10.0.2.2:8000/get_predictions", header
+        "https://liver-disease-prediction-backend-1.onrender.com/get_predictions", header
   );
     FetchResultsModel response = fetchResultsModelFromJson(responsebody);
     return response;
@@ -68,7 +70,8 @@ class UserApiImpl implements UserApi {
    
      var responsebody = await server.delete(
        // "http://127.0.0.1:8000/detection", headerWithToken(), val,
-        "http://10.0.2.2:8000/delete_prediction/$id", header, ""
+       // "http://10.0.2.2:8000/delete_prediction/$id", header, ""
+       "https://liver-disease-prediction-backend-1.onrender.com/delete_prediction/$id", header, ""
   );
     ApiResponse response = apiResponseFromJson(responsebody);
     return response;

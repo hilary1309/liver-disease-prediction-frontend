@@ -92,10 +92,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const Spacer(),
                                   InkWell(
                                     onTap: () async {
-                          
                                     bool res = await  userProvider.deleteResult(id: "${data.id}");
+                        
                                     if (res){
                                       userProvider.fetchResult();
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                     SnackBar(
+                                          content: const Text('Scan deleted successfully'),
+                                          duration: const Duration(seconds: 2),
+                                          action: SnackBarAction(
+                                          label: 'Refresh',
+                                          onPressed: () {
+                                            userProvider.fetchResult(); // Refresh data
+                                          },
+                                        ),
+                                  ),
+                               );
+                                 } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                 SnackBar(
+                                       content: const Text('Taking long to delete. Please refresh app.'),
+                                       duration: const Duration(seconds: 2),
+                                       action: SnackBarAction(
+                                          label: 'Refresh',
+                                          onPressed: () {
+                                            userProvider.fetchResult(); // Refresh data
+                                          },
+                                        ),
+                              ),
+                             );
                                     }
                                     },
                                     child: const Icon(
